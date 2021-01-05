@@ -117,6 +117,7 @@ int m_pSurfaceData;
 
 // CPortal_Player
 int iNumPortalsPlaced;
+int m_StatsThisLevel;
 
 // IEngineVGuiInternal
 int Paint;

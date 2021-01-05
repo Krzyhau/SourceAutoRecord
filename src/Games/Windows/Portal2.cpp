@@ -121,6 +121,7 @@ void Portal2::LoadOffsets()
     IsPlayer = 85; // CBasePlayer
     m_pSurfaceData = 3868; // CGameMovement::CheckJumpButton
     jumpFactor = 68; // CGameMovement::CheckJumpButton
+		m_StatsThisLevel = 5696; // CPortal_Player
 
     // client.dll
 
