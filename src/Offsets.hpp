@@ -114,6 +114,13 @@ extern int m_nWaterLevel;
 extern int m_bDucked;
 extern int m_flFriction;
 extern int m_pSurfaceData;
+extern int m_pShadowStand;
+extern int m_pShadowCrouch;
+extern int m_Local;
+
+// CPlayerLocalData
+extern int m_nTractorBeamCount;
+extern int m_hTractorBeam;
 
 // CPortal_Player
 extern int iNumPortalsPlaced;
@@ -177,6 +184,18 @@ extern int OnGameOverlayActivated;
 
 // surfacedata_t
 extern int jumpFactor;
+
+// IPhysicsObject
+extern int IsAsleep;
+extern int IsCollisionEnabled;
+extern int IsGravityEnabled;
+extern int IsDragEnabled;
+extern int IsMotionEnabled;
+extern int GetPosition;
+extern int GetVelocity;
+extern int SetPosition;
+extern int SetVelocity;
+extern int EnableGravity;
 
 // Others
 extern int tickcount;

@@ -30,11 +30,11 @@ void VphysHud::Paint(int slot)
     auto font = scheme->GetDefaultFont() + 1;
 
     void* player = server->GetPlayer(1);
-    void** pplocaldata = reinterpret_cast<void**>((uintptr_t)player + 5060); //apparently it's a struct and not a pointer lmfao
+    void** pplocaldata = reinterpret_cast<void**>((uintptr_t)player + Offsets::m_Local); //apparently it's a struct and not a pointer lmfao
 
-    int m_nTractorBeamCount = *reinterpret_cast<int*>((uintptr_t)pplocaldata + 396);
+    int m_nTractorBeamCount = *reinterpret_cast<int*>((uintptr_t)pplocaldata + Offsets::m_nTractorBeamCount);
 
-    void* m_hTractorBeam = *reinterpret_cast<void**>((uintptr_t)pplocaldata + 392);
+    void* m_hTractorBeam = *reinterpret_cast<void**>((uintptr_t)pplocaldata + Offsets::m_hTractorBeam);
 
     int cX = sar_vphys_hud_x.GetInt();
     int cY = sar_vphys_hud_y.GetInt();
@@ -43,22 +43,21 @@ void VphysHud::Paint(int slot)
     surface->DrawTxt(font, cX+5, cY+30, this->GetColor("255 255 255 255"), "m_nTractorBeamCount: %X", m_nTractorBeamCount);
 
 
-    void* m_pShadowStand = *reinterpret_cast<void**>((uintptr_t)player + 3160);
-    void* m_pShadowCrouch = *reinterpret_cast<void**>((uintptr_t)player + 3164);
+    void* m_pShadowStand = *reinterpret_cast<void**>((uintptr_t)player + Offsets::m_pShadowStand);
+    void* m_pShadowCrouch = *reinterpret_cast<void**>((uintptr_t)player + Offsets::m_pShadowCrouch);
 
-    using _IsAsleep = bool(__thiscall*)(void* thisptr);
-    using _IsEnabled = bool(__thiscall*)(void* thisptr);
-    using _GetPosition = void(__thiscall*)(void* thisptr, Vector* worldPosition, QAngle* angles);
-    using _GetContactPoint = bool(__thiscall*)(void* thisptr, Vector* contactPoint, void** contactObject);
-    using _GetVelocity = void(__thiscall*)(void* thisptr, Vector* velocity, Vector* angularVelocity);
+    using _IsAsleep = bool(__rescall*)(void* thisptr);
+    using _IsEnabled = bool(__rescall*)(void* thisptr);
+    using _GetPosition = void(__rescall*)(void* thisptr, Vector* worldPosition, QAngle* angles);
+    using _GetVelocity = void(__rescall*)(void* thisptr, Vector* velocity, Vector* angularVelocity);
 
-    _IsAsleep IsAsleep = Memory::VMT<_IsAsleep>(m_pShadowStand, 0x2);
-    _IsEnabled IsCollisionEnabled = Memory::VMT<_IsEnabled>(m_pShadowStand, 6);
-    _IsEnabled IsGravityEnabled = Memory::VMT<_IsEnabled>(m_pShadowStand, 7);
-    _IsEnabled IsDragEnabled = Memory::VMT<_IsEnabled>(m_pShadowStand, 8);
-    _IsEnabled IsMotionEnabled = Memory::VMT<_IsEnabled>(m_pShadowStand, 9);
-    _GetPosition GetPosition = Memory::VMT<_GetPosition>(m_pShadowStand, 48);
-    _GetVelocity GetVelocity = Memory::VMT<_GetVelocity>(m_pShadowStand, 52);
+    _IsAsleep IsAsleep = Memory::VMT<_IsAsleep>(m_pShadowStand, Offsets::IsAsleep);
+    _IsEnabled IsCollisionEnabled = Memory::VMT<_IsEnabled>(m_pShadowStand, Offsets::IsCollisionEnabled);
+    _IsEnabled IsGravityEnabled = Memory::VMT<_IsEnabled>(m_pShadowStand, Offsets::IsGravityEnabled);
+    _IsEnabled IsDragEnabled = Memory::VMT<_IsEnabled>(m_pShadowStand, Offsets::IsDragEnabled);
+    _IsEnabled IsMotionEnabled = Memory::VMT<_IsEnabled>(m_pShadowStand, Offsets::IsMotionEnabled);
+    _GetPosition GetPosition = Memory::VMT<_GetPosition>(m_pShadowStand, Offsets::GetPosition);
+    _GetVelocity GetVelocity = Memory::VMT<_GetVelocity>(m_pShadowStand, Offsets::GetVelocity);
 
     auto drawPhysicsInfo = [=](int y, void* shadow, const char* name) {
         
@@ -118,11 +117,11 @@ CON_COMMAND(sar_vphys_setgravity, "sar_vphys_setgravity <hitbox> <enabled>: Sets
     }
 
     void* player = server->GetPlayer(1);
-    void* m_pShadowStand = *reinterpret_cast<void**>((uintptr_t)player + 3160);
-    void* m_pShadowCrouch = *reinterpret_cast<void**>((uintptr_t)player + 3164);
+    void* m_pShadowStand = *reinterpret_cast<void**>((uintptr_t)player + Offsets::m_pShadowStand);
+    void* m_pShadowCrouch = *reinterpret_cast<void**>((uintptr_t)player + Offsets::m_pShadowCrouch);
 
-    using _EnableGravity = bool(__thiscall*)(void* thisptr, bool enabled);
-    _EnableGravity EnableGravity = Memory::VMT<_EnableGravity>(m_pShadowStand, 13);
+    using _EnableGravity = bool(__rescall*)(void* thisptr, bool enabled);
+    _EnableGravity EnableGravity = Memory::VMT<_EnableGravity>(m_pShadowStand, Offsets::EnableGravity);
     
     int hitbox = std::atoi(args[1]);
     int enabled = std::atoi(args[2]);
@@ -144,13 +143,13 @@ CON_COMMAND(sar_vphys_setangle, "sar_vphys_setangle <hitbox> <angle>: Sets rotat
     }
 
     void* player = server->GetPlayer(1);
-    void* m_pShadowStand = *reinterpret_cast<void**>((uintptr_t)player + 3160);
-    void* m_pShadowCrouch = *reinterpret_cast<void**>((uintptr_t)player + 3164);
+    void* m_pShadowStand = *reinterpret_cast<void**>((uintptr_t)player + Offsets::m_pShadowStand);
+    void* m_pShadowCrouch = *reinterpret_cast<void**>((uintptr_t)player + Offsets::m_pShadowCrouch);
 
-    using _SetPosition = void(__thiscall*)(void* thisptr, const Vector& worldPosition, const QAngle& angles, bool isTeleport);
-    using _GetPosition = void(__thiscall*)(void* thisptr, Vector* worldPosition, QAngle* angles);
-    _SetPosition SetPosition = Memory::VMT<_SetPosition>(m_pShadowStand, 46);
-    _GetPosition GetPosition = Memory::VMT<_GetPosition>(m_pShadowStand, 48);
+    using _SetPosition = void(__rescall*)(void* thisptr, const Vector& worldPosition, const QAngle& angles, bool isTeleport);
+    using _GetPosition = void(__rescall*)(void* thisptr, Vector* worldPosition, QAngle* angles);
+    _SetPosition SetPosition = Memory::VMT<_SetPosition>(m_pShadowStand, Offsets::SetPosition);
+    _GetPosition GetPosition = Memory::VMT<_GetPosition>(m_pShadowStand, Offsets::GetPosition);
 
     int hitbox = std::atoi(args[1]);
     float angle = std::atof(args[2]);
@@ -178,13 +177,13 @@ CON_COMMAND(sar_vphys_setspin, "sar_vphys_setspin <hitbox> <angvel>: Sets rotati
     }
 
     void* player = server->GetPlayer(1);
-    void* m_pShadowStand = *reinterpret_cast<void**>((uintptr_t)player + 3160);
-    void* m_pShadowCrouch = *reinterpret_cast<void**>((uintptr_t)player + 3164);
+    void* m_pShadowStand = *reinterpret_cast<void**>((uintptr_t)player + Offsets::m_pShadowStand);
+    void* m_pShadowCrouch = *reinterpret_cast<void**>((uintptr_t)player + Offsets::m_pShadowCrouch);
 
-    using _GetVelocity = void(__thiscall*)(void* thisptr, Vector* velocity, Vector* angularVelocity);
-    _GetVelocity GetVelocity = Memory::VMT<_GetVelocity>(m_pShadowStand, 52);
-    using _SetVelocity = void(__thiscall*)(void* thisptr, const Vector* velocity, const Vector* angularVelocity);
-    _SetVelocity SetVelocity = Memory::VMT<_SetVelocity>(m_pShadowStand, 50);
+    using _GetVelocity = void(__rescall*)(void* thisptr, Vector* velocity, Vector* angularVelocity);
+    _GetVelocity GetVelocity = Memory::VMT<_GetVelocity>(m_pShadowStand, Offsets::GetVelocity);
+    using _SetVelocity = void(__rescall*)(void* thisptr, const Vector* velocity, const Vector* angularVelocity);
+    _SetVelocity SetVelocity = Memory::VMT<_SetVelocity>(m_pShadowStand, Offsets::SetVelocity);
 
     int hitbox = std::atoi(args[1]);
     float angle = std::atof(args[2]);

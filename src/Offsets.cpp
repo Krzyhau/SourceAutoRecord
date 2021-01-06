@@ -114,6 +114,13 @@ int m_nWaterLevel;
 int m_bDucked;
 int m_flFriction;
 int m_pSurfaceData;
+int m_pShadowStand;
+int m_pShadowCrouch;
+int m_Local;
+
+// CPlayerLocalData
+int m_nTractorBeamCount;
+int m_hTractorBeam;
 
 // CPortal_Player
 int iNumPortalsPlaced;
@@ -177,6 +184,18 @@ int OnGameOverlayActivated;
 
 // surfacedata_t
 int jumpFactor;
+
+// IPhysicsObject
+int IsAsleep;
+int IsCollisionEnabled;
+int IsGravityEnabled;
+int IsDragEnabled;
+int IsMotionEnabled;
+int GetPosition;
+int GetVelocity;
+int SetPosition;
+int SetVelocity;
+int EnableGravity;
 
 // Others
 int tickcount;
