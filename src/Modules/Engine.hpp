@@ -49,8 +49,6 @@ public:
     using _AddLineOverlay = void(__stdcall*)(void* thisptr, const Vector& origin, const Vector& dest, int r, int g, int b, bool noDepthTest, float duration);
     using _ConPrintEvent = int(__cdecl*)(void* thisptr, IGameEvent* ev);
 #endif
-    using _GetCount = int(__rescall*)(void* thisptr);
-    using _UnreferenceAllModels = void(__stdcall*)(int referencetype);
 
     _GetScreenSize GetScreenSize = nullptr;
     _ClientCmd ClientCmd = nullptr;
@@ -70,8 +68,6 @@ public:
     _ClientCommand ClientCommand = nullptr;
     _GetLocalClient GetLocalClient = nullptr;
     _TraceRay TraceRay = nullptr;
-    _GetCount GetCount = nullptr;
-    _UnreferenceAllModels UnreferenceAllModels = nullptr;
 
     EngineDemoPlayer* demoplayer = nullptr;
     EngineDemoRecorder* demorecorder = nullptr;
