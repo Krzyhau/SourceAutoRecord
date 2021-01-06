@@ -73,16 +73,16 @@ void Portal2::LoadOffsets()
     AddLineOverlay = 4; // CIVDebugOverlay
     MAX_SPLITSCREEN_PLAYERS = 2; // maxplayers
     OnGameOverlayActivated = 144; // CSteam3Client
-		IsAsleep = 2; // IPhysicsObject
-		IsCollisionEnabled = 6; // IPhysicsObject
-		IsGravityEnabled = 7; // IPhysicsObject
-		IsDragEnabled = 8; // IPhysicsObject
-		IsMotionEnabled = 9; // IPhysicsObject
-		GetPosition = 48; // IPhysicsObject
-		GetVelocity = 52; // IPhysicsObject
-		SetPosition = 46; // IPhysicsObject
-		SetVelocity = 50; // IPhysicsObject
-		EnableGravity = 13; // IPhysicsObject
+    IsAsleep = 2; // IPhysicsObject
+    IsCollisionEnabled = 6; // IPhysicsObject
+    IsGravityEnabled = 7; // IPhysicsObject
+    IsDragEnabled = 8; // IPhysicsObject
+    IsMotionEnabled = 9; // IPhysicsObject
+    GetPosition = 48; // IPhysicsObject
+    GetVelocity = 52; // IPhysicsObject
+    SetPosition = 46; // IPhysicsObject
+    SetVelocity = 50; // IPhysicsObject
+    EnableGravity = 13; // IPhysicsObject
 
     // vstdlib.dll
 
@@ -131,12 +131,12 @@ void Portal2::LoadOffsets()
     IsPlayer = 85; // CBasePlayer
     m_pSurfaceData = 3868; // CGameMovement::CheckJumpButton
     jumpFactor = 68; // CGameMovement::CheckJumpButton
-		m_StatsThisLevel = 5696; // CPortal_Player
-		m_pShadowStand = 3160; // CBasePlayer
-		m_pShadowCrouch = 3164; // CBasePlayer
-		m_Local = 5060; // CBasePlayer
-		m_nTractorBeamCount = 396; // CPlayerLocalData
-		m_hTractorBeam = 392; // CPlayerLocalData
+    m_StatsThisLevel = 5696; // CPortal_Player
+    m_pShadowStand = 3160; // CBasePlayer
+    m_pShadowCrouch = 3164; // CBasePlayer
+    m_Local = 5060; // CBasePlayer
+    m_nTractorBeamCount = 396; // CPlayerLocalData
+    m_hTractorBeam = 392; // CPlayerLocalData
 
     // client.dll
 

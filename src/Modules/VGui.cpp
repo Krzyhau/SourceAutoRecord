@@ -67,13 +67,14 @@ DETOUR(VGui::Paint, PaintMode_t mode)
     return result;
 }
 
-DETOUR(VGui::UpdateProgressBar, int progress) {
+DETOUR(VGui::UpdateProgressBar, int progress)
+{
     if (vgui->lastProgressBar != progress) {
         vgui->lastProgressBar = progress;
         vgui->progressBarCount = 0;
     }
     vgui->progressBarCount++;
-    if (sar_disable_progress_bar_update.GetInt()==1 && vgui->progressBarCount > 1) {
+    if (sar_disable_progress_bar_update.GetInt() == 1 && vgui->progressBarCount > 1) {
         return 0;
     }
     if (sar_disable_progress_bar_update.GetInt() == 2) {

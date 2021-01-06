@@ -90,7 +90,7 @@ void SeamshotFind::DrawLines()
 #define ADD_LINE_OVERLAY(...) engine->AddLineOverlay(nullptr, __VA_ARGS__)
 #endif
 
-            if(sar_seamshot_finder.GetBool()) {
+            if (sar_seamshot_finder.GetBool()) {
                 CGameTrace edgeTr;
                 edgeTr.fraction = 999;
                 for (int i = 0; i < 4; i++) {
@@ -133,7 +133,6 @@ void SeamshotFind::DrawLines()
                     //ADD_LINE_OVERLAY(edgeTr.endpos + test2v + test2o, edgeTr.endpos + test2v * -2 + test2o, 0, 0, 255, true, 0.06);
                 }
             }
-
 
             if (sar_seamshot_helper.GetBool()) {
                 int uiScale = 5;

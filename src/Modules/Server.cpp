@@ -6,6 +6,7 @@
 #include "Features/FovChanger.hpp"
 #include "Features/OffsetFinder.hpp"
 #include "Features/Routing/EntityInspector.hpp"
+#include "Features/Routing/SeamshotFind.hpp"
 #include "Features/Session.hpp"
 #include "Features/Speedrun/SpeedrunTimer.hpp"
 #include "Features/Stats/Stats.hpp"
@@ -14,7 +15,6 @@
 #include "Features/Tas/TasTools.hpp"
 #include "Features/Timer/PauseTimer.hpp"
 #include "Features/Timer/Timer.hpp"
-#include "Features/Routing/SeamshotFind.hpp"
 #include "Features/GroundFramesCounter.hpp"
 
 #include "Engine.hpp"
@@ -346,7 +346,7 @@ DETOUR(Server::GameFrame, bool simulating)
     }
 
 #ifndef _WIN32
-        return result;
+    return result;
 #endif
 }
 

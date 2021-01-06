@@ -1,9 +1,9 @@
 #pragma once
-#include <climits>
 #include "Hud.hpp"
+#include <climits>
 
-#include "Variable.hpp"
 #include "Command.hpp"
+#include "Variable.hpp"
 
 struct LPHudCountHistoryInfo {
     int tick = 0;
@@ -18,6 +18,7 @@ private:
     std::vector<LPHudCountHistoryInfo> countHistory;
     char oldLevelName[260];
     int oldUpdateTick = INT_MAX;
+
 public:
     LPHud();
     bool ShouldDraw() override;

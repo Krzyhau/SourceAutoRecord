@@ -150,7 +150,9 @@ extern Variable net_showmsg;
 
 #define TIME_TO_TICKS(dt) ((int)(0.5f + (float)(dt) / *engine->interval_per_tick))
 #define GET_SLOT() engine->GetLocalPlayerIndex() - 1
-#define IGNORE_DEMO_PLAYER() if (engine->demoplayer->IsPlaying()) return;
+#define IGNORE_DEMO_PLAYER()             \
+    if (engine->demoplayer->IsPlaying()) \
+        return;
 
 #ifdef _WIN32
 #define GET_ACTIVE_SPLITSCREEN_SLOT() engine->GetActiveSplitScreenPlayerSlot()

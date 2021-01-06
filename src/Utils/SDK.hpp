@@ -11,8 +11,18 @@
 
 struct Vector {
     float x, y, z;
-    inline Vector() : x(0), y(0), z(0) {}
-    inline Vector(float x, float y, float z) : x(x), y(y), z(z) {}
+    inline Vector()
+        : x(0)
+        , y(0)
+        , z(0)
+    {
+    }
+    inline Vector(float x, float y, float z)
+        : x(x)
+        , y(y)
+        , z(z)
+    {
+    }
     inline float Length() const
     {
         return std::sqrt(x * x + y * y + z * z);
@@ -33,7 +43,8 @@ struct Vector {
         res.z = z * fl;
         return res;
     }
-    inline Vector operator/(float fl) {
+    inline Vector operator/(float fl)
+    {
         return *this * (1 / fl);
     }
     inline Vector operator+(Vector vec)
@@ -60,9 +71,9 @@ struct Vector {
     {
         return ((float*)this)[i];
     }
-    static inline float DotProduct(const Vector& a, const Vector& b) 
+    static inline float DotProduct(const Vector& a, const Vector& b)
     {
-        return a.x*b.x + a.y*b.y + a.z*b.z; 
+        return a.x * b.x + a.y * b.y + a.z * b.z;
     }
     inline Vector Cross(const Vector& v)
     {
@@ -72,7 +83,8 @@ struct Vector {
         out.z = this->x * v.y - this->y * v.x;
         return out;
     }
-    inline Vector Normalize() {
+    inline Vector Normalize()
+    {
         return *this / this->Length();
     }
 };
@@ -943,7 +955,6 @@ enum PaintMode_t {
     PAINT_INGAMEPANELS = (1 << 1),
 };
 
-
 #pragma region RayTracing
 
 #define CONTENTS_EMPTY 0x0
@@ -953,7 +964,7 @@ enum PaintMode_t {
 #define CONTENTS_GRATE 0x8
 #define CONTENTS_SLIME 0x10
 #define CONTENTS_WATER 0x20
-#define CONTENTS_BLOCKLOS 0x40 
+#define CONTENTS_BLOCKLOS 0x40
 #define CONTENTS_OPAQUE 0x80
 #define LAST_VISIBLE_CONTENTS 0x80
 #define ALL_VISIBLE_CONTENTS (LAST_VISIBLE_CONTENTS | (LAST_VISIBLE_CONTENTS - 1))
@@ -1060,7 +1071,9 @@ struct VectorAligned : public Vector {
         , w(0){};
     VectorAligned(float x, float y, float z)
         : Vector(x, y, z)
-        , w(0) {}
+        , w(0)
+    {
+    }
     float w;
 };
 

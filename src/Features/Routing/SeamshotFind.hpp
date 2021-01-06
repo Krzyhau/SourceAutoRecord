@@ -5,7 +5,6 @@
 #include "Utils.hpp"
 #include "Variable.hpp"
 
-
 class SeamshotFind : public Feature {
 public:
     SeamshotFind();

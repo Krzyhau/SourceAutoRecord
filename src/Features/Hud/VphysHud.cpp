@@ -2,14 +2,14 @@
 
 #include "Features/Speedrun/SpeedrunTimer.hpp"
 
+#include "Features/EntityList.hpp"
+#include "Modules/Engine.hpp"
 #include "Modules/Scheme.hpp"
 #include "Modules/Server.hpp"
-#include "Modules/Engine.hpp"
 #include "Modules/Surface.hpp"
-#include "Features/EntityList.hpp"
 
-#include "Variable.hpp"
 #include "Command.hpp"
+#include "Variable.hpp"
 
 VphysHud vphysHud;
 
@@ -39,9 +39,8 @@ void VphysHud::Paint(int slot)
     int cX = sar_vphys_hud_x.GetInt();
     int cY = sar_vphys_hud_y.GetInt();
 
-    surface->DrawTxt(font, cX+5, cY+10, this->GetColor("255 255 255 255"), "m_hTractorBeam: %#08X", m_hTractorBeam);
-    surface->DrawTxt(font, cX+5, cY+30, this->GetColor("255 255 255 255"), "m_nTractorBeamCount: %X", m_nTractorBeamCount);
-
+    surface->DrawTxt(font, cX + 5, cY + 10, this->GetColor("255 255 255 255"), "m_hTractorBeam: %#08X", m_hTractorBeam);
+    surface->DrawTxt(font, cX + 5, cY + 30, this->GetColor("255 255 255 255"), "m_nTractorBeamCount: %X", m_nTractorBeamCount);
 
     void* m_pShadowStand = *reinterpret_cast<void**>((uintptr_t)player + Offsets::m_pShadowStand);
     void* m_pShadowCrouch = *reinterpret_cast<void**>((uintptr_t)player + Offsets::m_pShadowCrouch);
@@ -60,7 +59,6 @@ void VphysHud::Paint(int slot)
     _GetVelocity GetVelocity = Memory::VMT<_GetVelocity>(m_pShadowStand, Offsets::GetVelocity);
 
     auto drawPhysicsInfo = [=](int y, void* shadow, const char* name) {
-        
         Vector p, v, a;
         QAngle q;
         GetPosition(shadow, &p, &q);
@@ -122,7 +120,7 @@ CON_COMMAND(sar_vphys_setgravity, "sar_vphys_setgravity <hitbox> <enabled>: Sets
 
     using _EnableGravity = bool(__rescall*)(void* thisptr, bool enabled);
     _EnableGravity EnableGravity = Memory::VMT<_EnableGravity>(m_pShadowStand, Offsets::EnableGravity);
-    
+
     int hitbox = std::atoi(args[1]);
     int enabled = std::atoi(args[2]);
 

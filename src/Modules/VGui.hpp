@@ -18,6 +18,7 @@ private:
 
     int lastProgressBar = 0;
     int progressBarCount = 0;
+
 public:
     std::vector<HudElement*> elements = std::vector<HudElement*>();
 
