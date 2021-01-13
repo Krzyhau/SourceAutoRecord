@@ -16,6 +16,7 @@
 #include "Features/Routing/SeamshotFind.hpp"
 #include "Features/Routing/Tracer.hpp"
 #include "Features/Session.hpp"
+#include "Features/ShaneLoads.hpp"
 #include "Features/Speedrun/SpeedrunTimer.hpp"
 #include "Features/Stats/Stats.hpp"
 #include "Features/StepCounter.hpp"

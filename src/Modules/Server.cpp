@@ -8,6 +8,7 @@
 #include "Features/Routing/EntityInspector.hpp"
 #include "Features/Routing/SeamshotFind.hpp"
 #include "Features/Session.hpp"
+#include "Features/ShaneLoads.hpp"
 #include "Features/Speedrun/SpeedrunTimer.hpp"
 #include "Features/Stats/Stats.hpp"
 #include "Features/StepCounter.hpp"
@@ -337,6 +338,8 @@ DETOUR(Server::GameFrame, bool simulating)
     if (simulating) {
         seamshotFind->DrawLines();
     }
+
+    shaneLoads->Update();
 
 #ifndef _WIN32
     return result;
