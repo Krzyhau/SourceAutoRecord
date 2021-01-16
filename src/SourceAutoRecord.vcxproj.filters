@@ -328,6 +328,9 @@
     <ClCompile Include="Modules\MaterialSystem.cpp">
       <Filter>SourceAutoRecord\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Features\GroundFramesCounter.cpp">
+      <Filter>SourceAutoRecord\Features</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\minhook\buffer.h">
@@ -683,6 +686,9 @@
     </ClInclude>
     <ClInclude Include="Modules\MaterialSystem.hpp">
       <Filter>SourceAutoRecord\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Features\GroundFramesCounter.hpp">
+      <Filter>SourceAutoRecord\Features</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

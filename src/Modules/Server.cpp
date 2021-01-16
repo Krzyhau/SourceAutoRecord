@@ -15,6 +15,7 @@
 #include "Features/Timer/PauseTimer.hpp"
 #include "Features/Timer/Timer.hpp"
 #include "Features/Routing/SeamshotFind.hpp"
+#include "Features/GroundFramesCounter.hpp"
 
 #include "Engine.hpp"
 
@@ -128,6 +129,8 @@ DETOUR_T(bool, Server::CheckJumpButton)
         ++stat->jumps->total;
         ++stat->steps->total;
         stat->jumps->StartTrace(server->GetAbsOrigin(player));
+
+        groundFramesCounter->HandleJump();
     }
 
     return jumped;
@@ -177,6 +180,10 @@ DETOUR(Server::ProcessMovement, void* pPlayer, CMoveData* pMove)
         autoStrafer->Strafe(pPlayer, pMove);
         tasTools->SetAngles(pPlayer);
     }
+
+    unsigned int groundEntity = *reinterpret_cast<unsigned int*>((uintptr_t)pPlayer + 344); // m_hGroundEntity
+    bool grounded = groundEntity != 0xFFFFFFFF;
+    groundFramesCounter->HandleMovementFrame(grounded);
 
     return Server::ProcessMovement(thisptr, pPlayer, pMove);
 }
