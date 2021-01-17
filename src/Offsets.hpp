@@ -117,6 +117,7 @@ extern int m_pSurfaceData;
 extern int m_pShadowStand;
 extern int m_pShadowCrouch;
 extern int m_Local;
+extern int m_hGroundEntity;
 
 // CPlayerLocalData
 extern int m_nTractorBeamCount;
