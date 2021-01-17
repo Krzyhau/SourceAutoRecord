@@ -33,7 +33,7 @@
         version &= ~(flags);             \
     }
 
-#define TARGET_MOD  MODULE("server")
+#define TARGET_MOD MODULE("server")
 #define TARGET_MOD2 MODULE("engine")
 
 const char* Game::Version()

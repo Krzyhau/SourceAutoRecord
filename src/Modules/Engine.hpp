@@ -40,17 +40,15 @@ public:
     using _GetScreenSize = int(__stdcall*)(int& width, int& height);
     using _GetActiveSplitScreenPlayerSlot = int (*)();
     using _ScreenPosition = int(__stdcall*)(const Vector& point, Vector& screen);
-    using _AddLineOverlay = void(_stdcall*)(const Vector& origin, const Vector& dest, int r, int g, int b, bool noDepthTest, float duration);
+    using _AddLineOverlay = void(__stdcall*)(const Vector& origin, const Vector& dest, int r, int g, int b, bool noDepthTest, float duration);
     using _ConPrintEvent = int(__stdcall*)(IGameEvent* ev);
 #else
     using _GetScreenSize = int(__cdecl*)(void* thisptr, int& width, int& height);
     using _GetActiveSplitScreenPlayerSlot = int (*)(void* thisptr);
     using _ScreenPosition = int(__stdcall*)(void* thisptr, const Vector& point, Vector& screen);
-    using _AddLineOverlay = void(_stdcall*)(void* thisptr, const Vector& origin, const Vector& dest, int r, int g, int b, bool noDepthTest, float duration);
+    using _AddLineOverlay = void(__stdcall*)(void* thisptr, const Vector& origin, const Vector& dest, int r, int g, int b, bool noDepthTest, float duration);
     using _ConPrintEvent = int(__cdecl*)(void* thisptr, IGameEvent* ev);
 #endif
-    using _GetCount = int(__rescall*)(void* thisptr);
-    using _UnreferenceAllModels = void(__stdcall*)(int referencetype);
 
     _GetScreenSize GetScreenSize = nullptr;
     _ClientCmd ClientCmd = nullptr;
@@ -70,8 +68,6 @@ public:
     _ClientCommand ClientCommand = nullptr;
     _GetLocalClient GetLocalClient = nullptr;
     _TraceRay TraceRay = nullptr;
-    _GetCount GetCount = nullptr;
-    _UnreferenceAllModels UnreferenceAllModels = nullptr;
 
     EngineDemoPlayer* demoplayer = nullptr;
     EngineDemoRecorder* demorecorder = nullptr;
@@ -154,7 +150,9 @@ extern Variable net_showmsg;
 
 #define TIME_TO_TICKS(dt) ((int)(0.5f + (float)(dt) / *engine->interval_per_tick))
 #define GET_SLOT() engine->GetLocalPlayerIndex() - 1
-#define IGNORE_DEMO_PLAYER() if (engine->demoplayer->IsPlaying()) return;
+#define IGNORE_DEMO_PLAYER()             \
+    if (engine->demoplayer->IsPlaying()) \
+        return;
 
 #ifdef _WIN32
 #define GET_ACTIVE_SPLITSCREEN_SLOT() engine->GetActiveSplitScreenPlayerSlot()

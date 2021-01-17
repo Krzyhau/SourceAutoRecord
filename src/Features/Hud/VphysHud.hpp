@@ -1,8 +1,8 @@
 #pragma once
 #include "Hud.hpp"
 
-#include "Variable.hpp"
 #include "Command.hpp"
+#include "Variable.hpp"
 
 class VphysHud : public Hud {
 public:

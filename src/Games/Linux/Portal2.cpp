@@ -70,8 +70,19 @@ void Portal2::LoadOffsets()
     Frame = 6; // CEngine
     m_bLoadGame = 440; // CGameClient::ActivatePlaye/CBaseServer::m_szLevelName
     ScreenPosition = 11; // CIVDebugOverlay
+    AddLineOverlay = 4; // CIVDebugOverlay
     MAX_SPLITSCREEN_PLAYERS = 2; // maxplayers
     OnGameOverlayActivated = 152; // CSteam3Client
+    IsAsleep = 3; // IPhysicsObject
+    IsCollisionEnabled = 7; // IPhysicsObject
+    IsGravityEnabled = 8; // IPhysicsObject
+    IsDragEnabled = 9; // IPhysicsObject
+    IsMotionEnabled = 10; // IPhysicsObject
+    GetPosition = 49; // IPhysicsObject
+    GetVelocity = 53; // IPhysicsObject
+    SetPosition = 47; // IPhysicsObject
+    SetVelocity = 51; // IPhysicsObject
+    EnableGravity = 14; // IPhysicsObject
 
     // libvstdlib.so
 
@@ -117,9 +128,16 @@ void Portal2::LoadOffsets()
     GetIServerEntity = 2; // CServerTools
     m_EntPtrArray = 48; // CServerTools::GetIServerEntity
     ClientCommand = 39; // CVEngineServer
+    TraceRay = 5; // IEngineTrace
     IsPlayer = 86; // CBasePlayer
     m_pSurfaceData = 4116; // CGameMovement::CheckJumpButton
     jumpFactor = 72; // CGameMovement::CheckJumpButton
+    m_StatsThisLevel = 5720; // CPortal_Player
+    m_pShadowStand = 3184; // CBasePlayer
+    m_pShadowCrouch = 3188; // CBasePlayer
+    m_Local = 5084; // CBasePlayer
+    m_nTractorBeamCount = 396; // CPlayerLocalData
+    m_hTractorBeam = 392; // CPlayerLocalData
 
     // client.so
 

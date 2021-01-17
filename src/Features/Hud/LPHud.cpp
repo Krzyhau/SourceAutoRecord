@@ -1,7 +1,9 @@
+#include <algorithm>
+
 #include "LPHud.hpp"
 
-#include "Features/Speedrun/SpeedrunTimer.hpp"
 #include "Features/Session.hpp"
+#include "Features/Speedrun/SpeedrunTimer.hpp"
 
 #include "Modules/Engine.hpp"
 #include "Modules/Scheme.hpp"
@@ -29,7 +31,8 @@ bool LPHud::ShouldDraw()
     return shouldDraw;
 }
 
-void LPHud::Update() {
+void LPHud::Update()
+{
 
     if (engine->m_szLevelName[0] == '\0')
         return;
@@ -43,15 +46,14 @@ void LPHud::Update() {
         enabled = false;
     }
 
-    if (!enabled) return;
+    if (!enabled)
+        return;
 
     void* player = server->GetPlayer(1);
     if (player == nullptr) {
         //portalsCountFull = 0;
     } else {
-        void** m_StatsThisLevel = reinterpret_cast<void**>((uintptr_t)player + 5696);
-
-        int* iNumPortalsPlaced = reinterpret_cast<int*>((uintptr_t)m_StatsThisLevel + 4);
+        int* iNumPortalsPlaced = reinterpret_cast<int*>((uintptr_t)player + Offsets::m_StatsThisLevel + 4);
 
         if (oldInGamePortalCounter != *iNumPortalsPlaced) {
             if (oldInGamePortalCounter < *iNumPortalsPlaced) {
@@ -102,7 +104,11 @@ void LPHud::Paint(int slot)
     int cY = sar_lphud_y.GetInt();
 
     int xScreen, yScreen;
+#if _WIN32
     engine->GetScreenSize(xScreen, yScreen);
+#else
+    engine->GetScreenSize(nullptr, xScreen, yScreen);
+#endif
 
     int digitWidth = surface->GetFontLength(font, "3");
     int charHeight = surface->GetFontHeight(font);
@@ -133,7 +139,7 @@ bool LPHud::GetCurrentSize(int& xSize, int& ySize)
 void LPHud::Set(int count)
 {
     portalsCountFull = count;
-    countHistory.push_back({engine->GetTick(), count});
+    countHistory.push_back({ engine->GetTick(), count });
 }
 
 CON_COMMAND(sar_lphud_set, "sar_lphud_set <number> : Sets lp counter to given number.\n")
