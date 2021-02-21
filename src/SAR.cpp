@@ -68,6 +68,7 @@ bool SAR::Load(CreateInterfaceFn interfaceFactory, CreateInterfaceFn gameServerF
             this->features->AddFeature<Camera>(&camera);
             this->features->AddFeature<SegmentedTools>(&segmentedTools);
             this->features->AddFeature<GroundFramesCounter>(&groundFramesCounter);
+            this->features->AddFeature<MinecraftKrzyController>(&minecraftKrzyController);
             this->features->AddFeature<TimescaleDetect>(&timescaleDetect);
             this->features->AddFeature<ZachStats>(&zachStats);
 
