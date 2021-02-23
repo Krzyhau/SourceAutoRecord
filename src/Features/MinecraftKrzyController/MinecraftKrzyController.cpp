@@ -11,7 +11,8 @@ MinecraftKrzyController* minecraftKrzyController;
 Variable sar_mckrzy_enabled("sar_mckrzy_enabled", "0", 0, 1, "Enables connection with minecraft server.");
 Variable sar_mckrzy_walkspeed("sar_mckrzy_walkspeed", "175", 0, 175, "SPEEEEEED.");
 Variable sar_mckrzy_sensitivity("sar_mckrzy_sensitivity", "45", 0, 999999, "SPEEEEN");
-Variable sar_mckrzy_deadzone("sar_mckrzy_deadzone", "0.02", 0, 1, "DEDZONE DUDUDDUUDDUUDUDUD");
+Variable sar_mckrzy_lower_deadzone("sar_mckrzy_lower_deadzone", "0.1", 0, 0.999, "DEDZONE DUDUDDUUDDUUDUDUD");
+Variable sar_mckrzy_upper_deadzone("sar_mckrzy_upper_deadzone", "0.1", 0, 0.999, "DEDZONE DUDUDDUUDDUUDUDUD");
 
 MinecraftKrzyController::MinecraftKrzyController()
 {
@@ -19,9 +20,10 @@ MinecraftKrzyController::MinecraftKrzyController()
     this->ip = "185.201.112.76";
 }
 
-static float ApplyDeadzone(float analog, float deadzone) {
-    float dz = fmin(fmax(abs(deadzone), 0.0f),0.99f);
-    return fmax( (abs(analog) - dz) / (1 - dz), 0) * (analog > 0 ? 1 : -1);
+static float ApplyDeadzone(float analog) {
+    float lower = sar_mckrzy_lower_deadzone.GetFloat();
+    float upper = sar_mckrzy_upper_deadzone.GetFloat();
+    return fmin(fmax( (abs(analog) - lower) / (1 - lower - upper), 0), 1) * (analog > 0 ? 1 : -1);
 }
 
 void MinecraftKrzyController::ProcessMovement(CMoveData* pMove)
@@ -31,16 +33,15 @@ void MinecraftKrzyController::ProcessMovement(CMoveData* pMove)
     }
     else if (dataRecv.IsActive()) {
         DumbControllerData data = dataRecv.GetData();
-        float deadzone = sar_mckrzy_deadzone.GetFloat();
 
         //movement
-        pMove->m_flSideMove += ApplyDeadzone(data.movementX, deadzone) * sar_mckrzy_walkspeed.GetFloat();
-        pMove->m_flForwardMove += ApplyDeadzone(data.movementY, deadzone) * sar_mckrzy_walkspeed.GetFloat();
+        pMove->m_flSideMove += ApplyDeadzone(data.movementX) * sar_mckrzy_walkspeed.GetFloat();
+        pMove->m_flForwardMove += ApplyDeadzone(data.movementY) * sar_mckrzy_walkspeed.GetFloat();
         
         //angles
         QAngle angles = engine->GetAngles(GET_SLOT());
-        angles.x -= ApplyDeadzone(data.angleY, deadzone) * sar_mckrzy_sensitivity.GetFloat() * 0.016f;
-        angles.y -= ApplyDeadzone(data.angleX, deadzone) * sar_mckrzy_sensitivity.GetFloat() * 0.016f;
+        angles.x -= ApplyDeadzone(data.angleY) * sar_mckrzy_sensitivity.GetFloat() * 0.016f;
+        angles.y -= ApplyDeadzone(data.angleX) * sar_mckrzy_sensitivity.GetFloat() * 0.016f;
         engine->SetAngles(GET_SLOT(),angles);
 
         //digital inputs

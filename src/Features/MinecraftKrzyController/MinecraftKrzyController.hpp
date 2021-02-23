@@ -9,7 +9,8 @@
 extern Variable sar_mckrzy_enabled;
 extern Variable sar_mckrzy_walkspeed;
 extern Variable sar_mckrzy_sensitivity;
-extern Variable sar_mckrzy_deadzone;
+extern Variable sar_mckrzy_lower_deadzone;
+extern Variable sar_mckrzy_upper_deadzone;
 
 class MinecraftKrzyController : public Feature {
 private:
