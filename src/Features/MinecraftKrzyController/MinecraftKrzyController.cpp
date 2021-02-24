@@ -26,7 +26,7 @@ static float ApplyDeadzone(float analog) {
     return fmin(fmax( (abs(analog) - lower) / (1 - lower - upper), 0), 1) * (analog > 0 ? 1 : -1);
 }
 
-void MinecraftKrzyController::ProcessMovement(CMoveData* pMove)
+void MinecraftKrzyController::ControllerMove(int nSlot, float flFrametime, CUserCmd* cmd)
 {
     if (!dataRecv.IsInitialized() && sar_mckrzy_enabled.GetBool()) {
         dataRecv.Initialize(this->ip);
@@ -35,8 +35,8 @@ void MinecraftKrzyController::ProcessMovement(CMoveData* pMove)
         DumbControllerData data = dataRecv.GetData();
 
         //movement
-        pMove->m_flSideMove += ApplyDeadzone(data.movementX) * sar_mckrzy_walkspeed.GetFloat();
-        pMove->m_flForwardMove += ApplyDeadzone(data.movementY) * sar_mckrzy_walkspeed.GetFloat();
+        cmd->sidemove += ApplyDeadzone(data.movementX) * sar_mckrzy_walkspeed.GetFloat();
+        cmd->forwardmove += ApplyDeadzone(data.movementY) * sar_mckrzy_walkspeed.GetFloat();
         
         //angles
         QAngle angles = engine->GetAngles(GET_SLOT());

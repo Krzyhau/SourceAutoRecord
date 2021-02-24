@@ -190,7 +190,6 @@ DETOUR(Server::ProcessMovement, void* pPlayer, CMoveData* pMove)
     unsigned int groundEntity = *reinterpret_cast<unsigned int*>((uintptr_t)pPlayer + Offsets::m_hGroundEntity);
     bool grounded = groundEntity != 0xFFFFFFFF;
     groundFramesCounter->HandleMovementFrame(grounded);
-    minecraftKrzyController->ProcessMovement(pMove);
 
     return Server::ProcessMovement(thisptr, pPlayer, pMove);
 }

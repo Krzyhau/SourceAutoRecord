@@ -20,7 +20,7 @@ private:
 public:
     MinecraftKrzyController();
     ~MinecraftKrzyController();
-    void ProcessMovement(CMoveData* pMove);
+    void ControllerMove(int nSlot, float flFrametime, CUserCmd* cmd);
     void SetIPAddress(std::string ip) { this->ip = ip; };
 };
 

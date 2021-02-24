@@ -74,6 +74,7 @@ extern int SetCursorPosition;
 
 // CInput
 extern int GetButtonBits;
+extern int SteamControllerMove;
 extern int DecodeUserCmdFromBuffer;
 
 // CGameMovement

@@ -76,6 +76,9 @@ public:
 
     DECL_DETOUR_COMMAND(playvideo_end_level_transition);
 
+    // CInput::SteamControllerMove
+    DECL_DETOUR(SteamControllerMove, int nSlot, float flFrametime, CUserCmd* cmd);
+
     bool Init() override;
     void Shutdown() override;
     const char* Name() override { return MODULE("client"); }

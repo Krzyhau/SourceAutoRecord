@@ -74,6 +74,7 @@ int SetCursorPosition;
 
 // CInput
 int GetButtonBits;
+int SteamControllerMove;
 int DecodeUserCmdFromBuffer;
 
 // CGameMovement
